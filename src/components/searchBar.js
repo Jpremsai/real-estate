@@ -1,12 +1,12 @@
 import React,{useContext, useState} from 'react'
-import { Text,Flex, Input, Button, Collapse,FormControl,FormLabel,Select,Box,useMediaQuery } from '@chakra-ui/react'
+import { Text,Flex,Button, Collapse,FormControl,Select,FormLabel,Menu,MenuButton,MenuItem,MenuList,Box,useMediaQuery } from '@chakra-ui/react'
 import {ChevronDownIcon, ChevronRightIcon} from '@chakra-ui/icons'
 import {HouseContext} from '../HouseContext'
 
 function SearchBar() {
     const [search, setSearch] = useState(false)
     const {smallScreen} = useMediaQuery('{min-width: 600px}')
-    const {houses,handleClick ,price,setPrice, country,setCountry, countries, property, properties, setProperty} = useContext(HouseContext)
+    const {handleClick ,setPrice, setCountry, countries, properties, setProperty} = useContext(HouseContext)
     const prices = [
       {
         value: 'Price range (any)',
@@ -44,32 +44,35 @@ function SearchBar() {
         </Box>
         </Flex>
         <Collapse in={search} >
-          <Flex justifyContent='space-evenly' pb='10' flexWrap='wrap' flexDirection={smallScreen ? 'column':'row'}>
-              <FormControl>
-              <FormLabel fontSize='smaller' color='gray.500'>Location</FormLabel>
-                <Select w='3xs'>
+          <Flex justifyContent='space-evenly' pt='20' flexWrap='wrap' flexDirection={smallScreen ? 'column':'row'}>
+            
+                <Menu>
+                  <MenuButton>Location{<ChevronDownIcon />}</MenuButton>
+                  <MenuList>
                   {countries.map((country, index) => (
-                    <option  onClick={() => setCountry(country)} key={index}>{country}</option>
+                    <MenuItem  onClick={() => setCountry(country)} value={country} key={index}>{country}</MenuItem>
                     ))}
-                </Select>
-                </FormControl>
-            <FormControl>
-              <FormLabel fontSize='smaller' color='gray.500'>Price range</FormLabel>
-                <Select w='3xs' >
+                    </MenuList>
+                </Menu>
+             
+                <Menu>
+                  <MenuButton>price {<ChevronDownIcon />}</MenuButton>
+                  <MenuList>
                   {prices.map((price, index) => (
-                    <option onClick={() => setPrice(price.value)} key={index}>{price.value}</option>
+                    <MenuItem onClick={() => setPrice(price.value)} value={price.value} key={index}>{price.value}</MenuItem>
                     ))}
-                </Select>
-            </FormControl>
-            <FormControl>
-              <FormLabel fontSize='smaller' color='gray.500'>Property Type</FormLabel>
-                <Select w='3xs'>
+                    </MenuList>
+                </Menu>
+             
+                <Menu>
+                  <MenuButton>property type {<ChevronDownIcon />} </MenuButton>
+                  <MenuList>
                   {properties.map((property, index) => (
-                    <option onClick={() => setProperty(property)} key={index}>{property}</option>
+                    <MenuItem onClick={() => setProperty(property)} value={property} key={index}>{property}</MenuItem>
                     ))}
-                </Select>
-                </FormControl>
-            <Button ml='5' color='white' size='large' w='100%' bg='purple.400' onClick={() => handleClick()}>Save</Button>
+                </MenuList>
+                </Menu>
+                <Button m='5' color='white' size='large' w='100%' bg='purple.400' onClick={() => handleClick()}>Save</Button>
             </Flex>
         </Collapse>
     </Flex>
