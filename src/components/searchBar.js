@@ -6,7 +6,7 @@ import {HouseContext} from '../HouseContext'
 function SearchBar() {
     const [search, setSearch] = useState(false)
     const {smallScreen} = useMediaQuery('{min-width: 600px}')
-    const {date, setDate,houses,handleClick ,price,setPrice, country,setCountry, countries, property, properties, setProperty} = useContext(HouseContext)
+    const {houses,handleClick ,price,setPrice, country,setCountry, countries, property, properties, setProperty} = useContext(HouseContext)
     const prices = [
       {
         value: 'Price range (any)',
@@ -53,10 +53,6 @@ function SearchBar() {
                     ))}
                 </Select>
                 </FormControl>
-            <FormControl>
-              <FormLabel fontSize='smaller' color='gray.500'>When</FormLabel>
-            <Input type='date' w='3xs' onChange={(e) => setDate(e.target.value)} value={date} placeholder='Move-in date'/>
-            </FormControl>
             <FormControl>
               <FormLabel fontSize='smaller' color='gray.500'>Price range</FormLabel>
                 <Select w='3xs' >
