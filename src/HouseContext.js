@@ -27,7 +27,7 @@ const HouseContextProvider = ({ children }) => {
 
     // set countries state
     setCountries(uniqueCountries);
-  }, [houses]);
+  }, []);
 
   useEffect(() => {
     // return only countries
@@ -40,7 +40,7 @@ const HouseContextProvider = ({ children }) => {
 
     // set countries state
     setProperties(uniqueProperties);
-  }, [houses]);
+  }, []);
 
   const handleClick = () => {
     setLoading(true);
