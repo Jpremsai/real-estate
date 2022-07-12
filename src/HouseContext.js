@@ -15,8 +15,6 @@ const HouseContextProvider = ({ children }) => {
   const [properties, setProperties] = useState([]);
   const [price, setPrice] = useState('Price range (any)');
   const [loading, setLoading] = useState(false);
-  const today = new Date().toString();
-  const [date, setDate] = useState(today)
 
   useEffect(() => {
     // return all countries
@@ -63,58 +61,40 @@ const HouseContextProvider = ({ children }) => {
         house.country === country &&
         house.type === property &&
         housePrice >= minPrice &&
-        housePrice <= maxPrice && date.parse() >= house.availableDate
+        housePrice <= maxPrice
       ) {
         return house;
       }
       // all values are default
-      if (isDefault(country) && isDefault(property) && isDefault(price) && date.parse() === today.parse()) {
+      if (isDefault(country) && isDefault(property) && isDefault(price)) {
         return house;
       }
       // country is not default
-      if (!isDefault(country) && isDefault(property) && isDefault(price) && date.parse() === today.parse()) {
+      if (!isDefault(country) && isDefault(property) && isDefault(price)) {
         return house.country === country;
       }
       // property is not default
-      if (!isDefault(property) && isDefault(country) && isDefault(price) && date.parse() === today.parse()) {
+      if (!isDefault(property) && isDefault(country) && isDefault(price)) {
         return house.type === property;
       }
       // price is not default
-      if (!isDefault(price) && isDefault(country) && isDefault(property) && date.parse() === today.parse() ) {
+      if (!isDefault(price) && isDefault(country) && isDefault(property)) {
         if (housePrice >= minPrice && housePrice <= maxPrice) {
           return house;
         }
       }
-      // date is not default
-      if(isDefault(country) && isDefault(property) && isDefault(price) && date.parse() !== today.parse()){
-        return house.availableDate.parse() >= date.parse()
-      }
       // country and property is not default
-      if (!isDefault(country) && !isDefault(property) && isDefault(price) && date.parse() === today.parse()) {
+      if (!isDefault(country) && !isDefault(property) && isDefault(price)) {
         return house.country === country && house.type === property;
       }
-      //country and date is not default
-      if (!isDefault(country) && isDefault(property) && isDefault(price) && date.parse() !== today.parse()) {
-        return house.country === country && house.availableDate.parse() >= date.parse();
-      }
-      //date and price is not default
-      if(isDefault(country) && isDefault(property) && !isDefault(price) && date.parse() !== today.parse()){
-        if (housePrice >= minPrice && housePrice <= maxPrice) {
-          return house.country === country && house.availableDate.parse() >= date.parse();
-        }
-      }
-      //date and property in not default
-      if(isDefault(country) && !isDefault(property) && isDefault(price) && date.parse() !== today.parse()){
-        return house.property === property && house.availableDate.parse() >= date.parse();
-      }
       // country and price is not default
-      if (!isDefault(country) && isDefault(property) && !isDefault(price) && date.parse() === today.parse()) {
+      if (!isDefault(country) && isDefault(property) && !isDefault(price)) {
         if (housePrice >= minPrice && housePrice <= maxPrice) {
           return house.country === country;
         }
       }
       // property and price is not default
-      if (isDefault(country) && !isDefault(property) && !isDefault(price) && date.parse() === today.parse() ) {
+      if (isDefault(country) && !isDefault(property) && !isDefault(price)) {
         if (housePrice >= minPrice && housePrice <= maxPrice) {
           return house.type === property;
         }
@@ -143,8 +123,6 @@ const HouseContextProvider = ({ children }) => {
         handleClick,
         houses,
         loading,
-    date,
-    setDate
       }}
     >
       {children}
