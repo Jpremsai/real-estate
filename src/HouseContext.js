@@ -143,6 +143,8 @@ const HouseContextProvider = ({ children }) => {
         handleClick,
         houses,
         loading,
+    date,
+    setDate
       }}
     >
       {children}
